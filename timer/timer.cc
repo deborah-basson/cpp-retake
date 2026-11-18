@@ -5,9 +5,13 @@
 void Timer::start()
 {
     if (running_)
+    {
         throw TimerException("start", "running");
+    }
     if (!at_zero_)
+    {
         throw TimerException("start", "not at zero");
+    }
 
     running_ = true;
     at_zero_ = false;
@@ -17,7 +21,9 @@ void Timer::start()
 void Timer::pause()
 {
     if (!running_)
+    {
         throw TimerException("pause", "not running");
+    }
 
     elapsed_ += yakatime::now() - start_time_;
     running_ = false;
@@ -26,9 +32,13 @@ void Timer::pause()
 void Timer::resume()
 {
     if (running_)
+    {
         throw TimerException("resume", "running");
+    }
     if (at_zero_)
+    {
         throw TimerException("resume", "at zero");
+    }
 
     running_ = true;
     start_time_ = yakatime::now();
@@ -42,7 +52,9 @@ void Timer::reset()
 double Timer::elapsed() const
 {
     if (running_)
+    {
         throw TimerException("elapsed", "running");
+    }
 
     return elapsed_;
 }
