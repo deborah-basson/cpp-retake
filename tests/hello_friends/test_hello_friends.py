@@ -1,12 +1,9 @@
-"""Shared tests for the greeter exercises (hello_friends, hola_amigos).
-
-Subclass GreeterSuite in a Test* class and set SRC, GREETING, NONE_MSG.
-"""
+"""Targeted tests for hello_friends."""
 
 import re
 
 import pytest
-from conftest import compile_cxx, require_tool, run, strip_comments_and_strings
+from conftest import ROOT, compile_cxx, require_tool, run, strip_comments_and_strings
 
 CASES = {
     "subject_example": ["Alice", "Bob", "Charlie"],
@@ -23,10 +20,10 @@ CASES = {
 }
 
 
-class GreeterSuite:
-    SRC = None
-    GREETING = None
-    NONE_MSG = None
+class TestHelloFriends:
+    SRC = ROOT / "hello_friends" / "hello_friends.cc"
+    GREETING = "Hello"
+    NONE_MSG = "No friends provided..."
 
     @pytest.fixture(autouse=True)
     def _require_src(self):

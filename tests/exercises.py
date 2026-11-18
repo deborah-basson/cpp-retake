@@ -1,7 +1,4 @@
-"""Per-exercise config: files to submit, authorized headers, forbidden symbols.
-
-Keys are exercise paths relative to the repo root.
-"""
+"""Per-exercise config: files to submit, authorized headers, forbidden symbols."""
 
 CXXFLAGS = [
     "-Wall",
@@ -12,43 +9,15 @@ CXXFLAGS = [
     "-Wold-style-cast",
 ]
 
-NO_NEW_DELETE = [r"\bnew\b", r"\bdelete\b"]
-
-
-def _container(prefix):
-    return {
-        "files": [
-            "CMakeLists.txt",
-            f"generic_{prefix}.hh",
-            f"generic_{prefix}.hxx",
-            f"int_{prefix}.cc",
-            f"int_{prefix}.hh",
-        ],
-        "allowed_headers": [
-            "ostream",
-            "iostream",
-            "memory",
-            "cassert",
-            f"int_{prefix}.hh",
-            f"generic_{prefix}.hxx",
-            f"generic_{prefix}.hh",
-            "stdexcept",
-            "utility",
-            "initializer_list",
-        ],
-        "extra_forbidden": NO_NEW_DELETE,
-    }
-
+NO_NEW_DELETE = [r"\bnew\b", r"\bdelete\b(?!\s*;)"]  # "= delete;" is OK
 
 EXERCISES = {
-    # ---- cpp_1 ----
-    "cpp_1/hello_friends": {
+    "hello_friends": {
         "files": ["hello_friends.cc"],
         "allowed_headers": ["iostream"],
         "extra_forbidden": [],
     },
-    "cpp_1/queue": _container("queue"),
-    "cpp_1/timer": {
+    "timer": {
         "files": [
             "auto_timer.cc",
             "auto_timer.hh",
@@ -73,14 +42,7 @@ EXERCISES = {
         ],
         "extra_forbidden": [],
     },
-    # ---- cpp_2 ----
-    "cpp_2/hola_amigos": {
-        "files": ["hola_amigos.cc"],
-        "allowed_headers": ["iostream"],
-        "extra_forbidden": [],
-    },
-    "cpp_2/stack": _container("stack"),
-    "cpp_2/war": {
+    "war": {
         "files": [
             "assassin.cc",
             "assassin.hh",

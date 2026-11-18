@@ -23,13 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        exercise:
-          - cpp_1/hello_friends
-          - cpp_1/queue
-          - cpp_1/timer
-          - cpp_2/hola_amigos
-          - cpp_2/stack
-          - cpp_2/war
+        exercise: [hello_friends, timer, war]
     name: ${{ matrix.exercise }}
     steps:
       - uses: actions/checkout@v4

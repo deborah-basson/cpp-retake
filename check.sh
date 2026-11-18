@@ -1,6 +1,6 @@
 #!/bin/sh
 # Local equivalent of the CI.
-# Usage: ./check.sh [style | cpp_1/hello_friends | cpp_2/stack | ...]
+# Usage: ./check.sh [style | hello_friends | timer | war]
 set -e
 cd "$(dirname "$0")"
 
