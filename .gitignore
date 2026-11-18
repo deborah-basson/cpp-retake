@@ -1,0 +1,10 @@
+build/
+*.o
+*.so
+a.out
+.pytest_cache/
+__pycache__/
+.venv/
+
+# Sujets EPITA : document personnel, ne pas versionner
+*.pdf

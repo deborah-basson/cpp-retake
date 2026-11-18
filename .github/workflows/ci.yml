@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  coding-style:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Coding style (clang-format, clang-tidy, EPITA rules)
+        run: pytest tests/style -v
+
+  exercise:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        exercise:
+          - cpp_1/hello_friends
+          - cpp_1/queue
+          - cpp_1/timer
+          - cpp_2/hola_amigos
+          - cpp_2/stack
+          - cpp_2/war
+    name: ${{ matrix.exercise }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq valgrind clang cmake
+          pip install -r requirements.txt
+      - name: Tests ${{ matrix.exercise }}
+        run: |
+          if [ ! -d "tests/${{ matrix.exercise }}" ]; then
+            echo "::notice::No tests yet for ${{ matrix.exercise }}"
+            exit 0
+          fi
+          pytest "tests/${{ matrix.exercise }}" -v
